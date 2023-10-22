@@ -10,6 +10,9 @@ services:
     ports:
       - 80:80
       
+    links: 
+     - frontend
+
   frontend:
     build: 
       context: ./frontend
@@ -18,8 +21,10 @@ services:
       - 3000:3000
     volumes:
       - ./frontend:/app
+    links:
+      - api
   
-  api:
+  api:       
     build: 
       context: ./api
       dockerfile: Dockerfile
@@ -27,6 +32,8 @@ services:
       - 5000:5000
     volumes:
       - ./api:/app
+    links:
+      - db
 
   db:
     image: postgres:15.3-alpine3.18

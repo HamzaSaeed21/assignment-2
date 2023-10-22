@@ -6,6 +6,20 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
         },
         // DEFINE YOUR MODEL HERE
+        number: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        contactId: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'contact',
+                key: 'id'
+            },
+            allowNull: false,
+            onDelete: 'CASCADE'
+        }
+
     });
   
     return Phone;
